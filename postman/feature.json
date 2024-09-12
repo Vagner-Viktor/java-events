@@ -1,0 +1,2490 @@
+{
+	"info": {
+		"_postman_id": "f9c2abe0-e09e-472f-8736-bd4814f80381",
+		"name": "Test Events - Feature \"Location processing\"",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19574588"
+	},
+	"item": [
+		{
+			"name": "LocationType",
+			"item": [
+				{
+					"name": "Create Location Type 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const source = JSON.parse(pm.request.body.raw);",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.eql(2);",
+									"    pm.expect(target.name).to.eql(\"Park\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Park\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location Types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+									"    pm.response.to.be.ok;    ",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name\", function () {",
+									"pm.expect(target[1]).to.have.property('id');",
+									"pm.expect(target[1]).to.have.property('name');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target[1].id).to.eql(2);",
+									"    pm.expect(target[1].name).to.eql(\"Park\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/types?text=&from=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"types"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": ""
+								},
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location Type By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+									"    pm.response.to.be.ok;    ",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.eql(2);",
+									"    pm.expect(target.name).to.eql(\"Park\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/types/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"types",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Location Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+									"    pm.response.to.be.ok;    ",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.eql(2);",
+									"    pm.expect(target.name).to.eql(\"New Type\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"New Type\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/types/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"types",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Location Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.sendRequest({",
+									"        url: \"http://localhost:8080/admin/locations/types/2\",",
+									"        method: \"GET\",",
+									"    }, (error, response) => {",
+									"        pm.test(\"Тип локации не должн быть найден после удаления\", function () {",
+									"            pm.expect(response.code).to.eql(404);",
+									"        });",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/types/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"types",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Location",
+			"item": [
+				{
+					"name": "Create Location Type 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const source = JSON.parse(pm.request.body.raw);",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.eql(3);",
+									"    pm.expect(target.name).to.eql(\"Park\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Park\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const source = JSON.parse(pm.request.body.raw);",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name, type, lat, lon, radius\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"pm.expect(target).to.have.property('type');",
+									"pm.expect(target).to.have.property('lat');",
+									"pm.expect(target).to.have.property('lon');",
+									"pm.expect(target).to.have.property('radius');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.not.be.null;",
+									"    pm.expect(target.name).to.eql(\"Central Park\");",
+									"    pm.expect(target.type).to.eql(\"Park\");",
+									"    pm.expect(target.lat).to.eql(40.785091);",
+									"    pm.expect(target.lon).to.eql(-73.968285);",
+									"    pm.expect(target.radius).to.eql(100.0);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Central Park\",\n  \"type\": \"Park\",\n  \"lat\": 40.785091,\n  \"lon\": -73.968285,\n  \"radius\": 100.0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Location - Invalid Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {",
+									"    pm.response.to.have.status(400);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"A\",\n  \"type\": \"B\",\n  \"lat\": null,\n  \"lon\": null,\n  \"radius\": -10.0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Location 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const source = JSON.parse(pm.request.body.raw);",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name, type, lat, lon, radius\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"pm.expect(target).to.have.property('type');",
+									"pm.expect(target).to.have.property('lat');",
+									"pm.expect(target).to.have.property('lon');",
+									"pm.expect(target).to.have.property('radius');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.not.be.null;",
+									"    pm.expect(target.name).to.eql(\"South Park\");",
+									"    pm.expect(target.type).to.eql(\"Park\");",
+									"    pm.expect(target.lat).to.eql(60.123091);",
+									"    pm.expect(target.lon).to.eql(-17.909285);",
+									"    pm.expect(target.radius).to.eql(10.0);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"South Park\",\n  \"type\": \"Park\",\n  \"lat\": 60.123091,\n  \"lon\": -17.909285,\n  \"radius\": 10.0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Locations",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+									"    pm.response.to.be.ok;    ",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name, type, lat, lon, radius\", function () {",
+									"pm.expect(target[0]).to.have.property('id');",
+									"pm.expect(target[0]).to.have.property('name');",
+									"pm.expect(target[0]).to.have.property('type');",
+									"pm.expect(target[0]).to.have.property('lat');",
+									"pm.expect(target[0]).to.have.property('lon');",
+									"pm.expect(target[0]).to.have.property('radius');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target[0].id).to.not.be.null;",
+									"    pm.expect(target[0].name).to.eql(\"Central Park\");",
+									"    pm.expect(target[0].type).to.eql(\"Park\");",
+									"    pm.expect(target[0].lat).to.eql(40.785091);",
+									"    pm.expect(target[0].lon).to.eql(-73.968285);",
+									"    pm.expect(target[0].radius).to.eql(100.0);",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target[1].id).to.not.be.null;",
+									"    pm.expect(target[1].name).to.eql(\"South Park\");",
+									"    pm.expect(target[1].type).to.eql(\"Park\");",
+									"    pm.expect(target[1].lat).to.eql(60.123091);",
+									"    pm.expect(target[1].lon).to.eql(-17.909285);",
+									"    pm.expect(target[1].radius).to.eql(10.0);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations?text=&from=0&size=10&types=3&radiusFrom=0.01&radiusTo=150",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": ""
+								},
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "lon",
+									"value": "-73.968285",
+									"disabled": true
+								},
+								{
+									"key": "lat",
+									"value": "40.785091",
+									"disabled": true
+								},
+								{
+									"key": "types",
+									"value": "3"
+								},
+								{
+									"key": "radiusFrom",
+									"value": "0.01"
+								},
+								{
+									"key": "radiusTo",
+									"value": "150"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Locations - Invalid Pagination",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {",
+									"    pm.response.to.have.status(500);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/locations?text=&from=-1&size=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": ""
+								},
+								{
+									"key": "from",
+									"value": "-1"
+								},
+								{
+									"key": "size",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Location Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+									"    pm.response.to.be.ok;    ",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.eql(3);",
+									"    pm.expect(target.name).to.eql(\"Updated Type\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Type\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/types/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"types",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+									"    pm.response.to.be.ok;    ",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const target = pm.response.json();",
+									"",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name, type, lat, lon, radius\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"pm.expect(target).to.have.property('type');",
+									"pm.expect(target).to.have.property('lat');",
+									"pm.expect(target).to.have.property('lon');",
+									"pm.expect(target).to.have.property('radius');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.eql(1);",
+									"    pm.expect(target.name).to.eql(\"Updated Park\");",
+									"    pm.expect(target.type).to.eql(\"Updated Type\");",
+									"    pm.expect(target.lat).to.eql(41.0000);",
+									"    pm.expect(target.lon).to.eql(-74.0000);",
+									"    pm.expect(target.radius).to.eql(150.0);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Park\",\n  \"type\": \"Updated Type\",\n  \"lat\": 41.0000,\n  \"lon\": -74.0000,\n  \"radius\": 150.0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Location in used",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "Create Location Type 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const source = JSON.parse(pm.request.body.raw);",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.eql(4);",
+									"    pm.expect(target.name).to.eql(\"Stadium\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Stadium\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Location 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const source = JSON.parse(pm.request.body.raw);",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name, type, lat, lon, radius\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"pm.expect(target).to.have.property('type');",
+									"pm.expect(target).to.have.property('lat');",
+									"pm.expect(target).to.have.property('lon');",
+									"pm.expect(target).to.have.property('radius');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.not.be.null;",
+									"    pm.expect(target.name).to.eql(\"Olympic Stadium\");",
+									"    pm.expect(target.type).to.eql(\"Stadium\");",
+									"    pm.expect(target.lat).to.eql(10.785091);",
+									"    pm.expect(target.lon).to.eql(-7.968285);",
+									"    pm.expect(target.radius).to.eql(10.0);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Olympic Stadium\",\n  \"type\": \"Stadium\",\n  \"lat\": 10.785091,\n  \"lon\": -7.968285,\n  \"radius\": 10.0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Category",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = JSON.parse(pm.request.body.raw);\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Категория должна содержать поля: id, name\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('name');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(target.id).to.not.be.null;\r",
+									"    pm.expect(source.name).equal(target.name, 'Название категории должно совпадать с отправленным');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Party\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"categories"
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Event 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(201);  \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = JSON.parse(pm.request.body.raw);\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Событие должно содержать поля: id, title, annotation, category, paid, eventDate, initiator, description, participantLimit, state, createdOn, location, requestModeration\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('title');\r",
+									"pm.expect(target).to.have.property('annotation');\r",
+									"pm.expect(target).to.have.property('category');\r",
+									"pm.expect(target).to.have.property('paid');\r",
+									"pm.expect(target).to.have.property('eventDate');\r",
+									"pm.expect(target).to.have.property('initiator');\r",
+									"pm.expect(target).to.have.property('description');\r",
+									"pm.expect(target).to.have.property('participantLimit');\r",
+									"pm.expect(target).to.have.property('state');\r",
+									"pm.expect(target).to.have.property('createdOn');\r",
+									"pm.expect(target).to.have.property('location');\r",
+									"pm.expect(target).to.have.property('requestModeration');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(target.id).to.not.be.null;\r",
+									"    pm.expect(target.title).equal(\"Metallica 2024\", 'Название события должно соответствовать названию события в запросе');\r",
+									"    pm.expect(target.annotation).equal(\"This is the first show of the 2024 leg of the M72 World Tour!\", 'Аннотация события должна соответствовать аннотации события в запросе');\r",
+									"    pm.expect(target.paid.toString()).equal(\"true\", 'Стоимость события должна соответствовать стоимости события в запросе');\r",
+									"    pm.expect(target.eventDate).equal(\"2024-10-03 20:00:00\", 'Дата проведения события должна соответствовать дате проведения события в запросе');\r",
+									"    pm.expect(target.description).equal(\"Hammer news for all Metallica fans: James Hetfield, Lars Ulrich, Kirk Hammett und Robert Trujillo are back with a new album. Two (double) shows have been confirmed at the Olympic Stadium as part of the 'M72 World Tour'.\", 'Описание события должно соответствовать описание события в запросе');\r",
+									"    pm.expect(target.participantLimit.toString()).equal(\"50000\", 'Лимит участников события должно соответствовать лимиту участников события в запросе');\r",
+									"    pm.expect(target.location.lat.toString()).equal(\"10.785091\", 'Широта локации проведения события должна соответствовать широте локации проведения события в запросе');\r",
+									"    pm.expect(target.location.lon.toString()).equal(\"-7.968285\", 'Долгота локации проведения события должна соответствовать долготе локации проведения события в запросе');\r",
+									"    pm.expect(target.requestModeration.toString()).equal(\"true\", 'Необходимость модерации события должна соответствовать необходимости модерации события в запросе');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"annotation\":\"This is the first show of the 2024 leg of the M72 World Tour!\",\n    \"category\":1,\n    \"description\":\"Hammer news for all Metallica fans: James Hetfield, Lars Ulrich, Kirk Hammett und Robert Trujillo are back with a new album. Two (double) shows have been confirmed at the Olympic Stadium as part of the 'M72 World Tour'.\",\n    \"eventDate\":\"2024-10-03 20:00:00\",\n    \"location\":\n        {\n            \"lat\":10.785091,\n            \"lon\":-7.968285\n        },\n    \"paid\":\"true\",\n    \"participantLimit\":\"50000\",\n    \"requestModeration\":\"true\",\n    \"title\":\"Metallica 2024\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1",
+								"events"
+							]
+						},
+						"description": "Обратите внимание: дата и время на которые намечено событие не может быть раньше, чем через два часа от текущего момента"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Location Type 5",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const source = JSON.parse(pm.request.body.raw);",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.eql(5);",
+									"    pm.expect(target.name).to.eql(\"Club\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Club\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations/types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations",
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Location 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const source = JSON.parse(pm.request.body.raw);",
+									"const target = pm.response.json();",
+									"",
+									"pm.test(\"Подборка должны содержать поля: id, name, type, lat, lon, radius\", function () {",
+									"pm.expect(target).to.have.property('id');",
+									"pm.expect(target).to.have.property('name');",
+									"pm.expect(target).to.have.property('type');",
+									"pm.expect(target).to.have.property('lat');",
+									"pm.expect(target).to.have.property('lon');",
+									"pm.expect(target).to.have.property('radius');",
+									"});",
+									"",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {",
+									"    pm.expect(target.id).to.not.be.null;",
+									"    pm.expect(target.name).to.eql(\"Plan B\");",
+									"    pm.expect(target.type).to.eql(\"Club\");",
+									"    pm.expect(target.lat).to.eql(20.785091);",
+									"    pm.expect(target.lon).to.eql(10.968285);",
+									"    pm.expect(target.radius).to.eql(1.0);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Plan B\",\n  \"type\": \"Club\",\n  \"lat\": 20.785091,\n  \"lon\": 10.968285,\n  \"radius\": 1.0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Event 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(201);  \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = JSON.parse(pm.request.body.raw);\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Событие должно содержать поля: id, title, annotation, category, paid, eventDate, initiator, description, participantLimit, state, createdOn, location, requestModeration\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('title');\r",
+									"pm.expect(target).to.have.property('annotation');\r",
+									"pm.expect(target).to.have.property('category');\r",
+									"pm.expect(target).to.have.property('paid');\r",
+									"pm.expect(target).to.have.property('eventDate');\r",
+									"pm.expect(target).to.have.property('initiator');\r",
+									"pm.expect(target).to.have.property('description');\r",
+									"pm.expect(target).to.have.property('participantLimit');\r",
+									"pm.expect(target).to.have.property('state');\r",
+									"pm.expect(target).to.have.property('createdOn');\r",
+									"pm.expect(target).to.have.property('location');\r",
+									"pm.expect(target).to.have.property('requestModeration');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(target.id).to.not.be.null;\r",
+									"    pm.expect(target.title).equal(\"Die Toten Hosen\", 'Название события должно соответствовать названию события в запросе');\r",
+									"    pm.expect(target.annotation).equal(\"The tour is dedicated to the 40th anniversary of the group!\", 'Аннотация события должна соответствовать аннотации события в запросе');\r",
+									"    pm.expect(target.paid.toString()).equal(\"true\", 'Стоимость события должна соответствовать стоимости события в запросе');\r",
+									"    pm.expect(target.eventDate).equal(\"2024-11-11 20:00:00\", 'Дата проведения события должна соответствовать дате проведения события в запросе');\r",
+									"    pm.expect(target.description).equal(\"Die Toten Hosen are a German punk rock band from Düsseldorf. The name is taken from the German slang idiom tote Hose, which means 'nothing happening'; 'boring'. The band has had an important success through the years, and it has built a loyal following both in Europe and South America, being particularly popular in their home country and in Argentina.\", 'Описание события должно соответствовать описание события в запросе');\r",
+									"    pm.expect(target.participantLimit.toString()).equal(\"50000\", 'Лимит участников события должно соответствовать лимиту участников события в запросе');\r",
+									"    pm.expect(target.location.lat.toString()).equal(\"20.785091\", 'Широта локации проведения события должна соответствовать широте локации проведения события в запросе');\r",
+									"    pm.expect(target.location.lon.toString()).equal(\"10.968285\", 'Долгота локации проведения события должна соответствовать долготе локации проведения события в запросе');\r",
+									"    pm.expect(target.requestModeration.toString()).equal(\"true\", 'Необходимость модерации события должна соответствовать необходимости модерации события в запросе');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"annotation\":\"The tour is dedicated to the 40th anniversary of the group!\",\n    \"category\":1,\n    \"description\":\"Die Toten Hosen are a German punk rock band from Düsseldorf. The name is taken from the German slang idiom tote Hose, which means 'nothing happening'; 'boring'. The band has had an important success through the years, and it has built a loyal following both in Europe and South America, being particularly popular in their home country and in Argentina.\",\n    \"eventDate\":\"2024-11-11 20:00:00\",\n    \"location\":\n        {\n            \"lat\":20.785091,\n            \"lon\":10.968285\n        },\n    \"paid\":\"true\",\n    \"participantLimit\":\"50000\",\n    \"requestModeration\":\"true\",\n    \"title\":\"Die Toten Hosen\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1",
+								"events"
+							]
+						},
+						"description": "Обратите внимание: дата и время на которые намечено событие не может быть раньше, чем через два часа от текущего момента"
+					},
+					"response": []
+				},
+				{
+					"name": "Search event by coordinates (Big radius - true)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = pm.collectionVariables.get('response');\r",
+									" target = pm.response.json()[0];\r",
+									"\r",
+									"pm.test(\"Количество событий должно быть больше или равно 2\", function () {\r",
+									"    pm.expect(pm.response.json().length).to.be.above(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Событие должно содержать поля: id, title, annotation, category, paid, eventDate, initiator, views, confirmedRequests, description, participantLimit, state, createdOn, publishedOn, location, requestModeration\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('title');\r",
+									"pm.expect(target).to.have.property('annotation');\r",
+									"pm.expect(target).to.have.property('category');\r",
+									"pm.expect(target).to.have.property('paid');\r",
+									"pm.expect(target).to.have.property('eventDate');\r",
+									"pm.expect(target).to.have.property('initiator');\r",
+									"pm.expect(target).to.have.property('views');\r",
+									"pm.expect(target).to.have.property('confirmedRequests');\r",
+									"pm.expect(target).to.have.property('description');\r",
+									"pm.expect(target).to.have.property('participantLimit');\r",
+									"pm.expect(target).to.have.property('state');\r",
+									"pm.expect(target).to.have.property('createdOn');\r",
+									"pm.expect(target).to.have.property('publishedOn');\r",
+									"pm.expect(target).to.have.property('location');\r",
+									"pm.expect(target).to.have.property('requestModeration');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/events?rangeStart=2012-01-06%2013%3A30%3A38&rangeEnd=2097-09-06%2013%3A30%3A38&from=0&size=1000&locLat=10&locLon=-7&locRadius=1000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"events"
+							],
+							"query": [
+								{
+									"key": "users",
+									"value": "",
+									"description": "список id пользователей, чьи события нужно найти",
+									"disabled": true
+								},
+								{
+									"key": "states",
+									"value": "PUBLISHED",
+									"description": "список состояний в которых находятся искомые события",
+									"disabled": true
+								},
+								{
+									"key": "categories",
+									"value": "",
+									"description": "список id категорий в которых будет вестись поиск",
+									"disabled": true
+								},
+								{
+									"key": "rangeStart",
+									"value": "2012-01-06%2013%3A30%3A38",
+									"description": "дата и время не раньше которых должно произойти событие"
+								},
+								{
+									"key": "rangeEnd",
+									"value": "2097-09-06%2013%3A30%3A38",
+									"description": "дата и время не позже которых должно произойти событие"
+								},
+								{
+									"key": "from",
+									"value": "0",
+									"description": "количество событий, которые нужно пропустить для формирования текущего набора"
+								},
+								{
+									"key": "size",
+									"value": "1000",
+									"description": "количество событий в наборе"
+								},
+								{
+									"key": "locLat",
+									"value": "10"
+								},
+								{
+									"key": "locLon",
+									"value": "-7"
+								},
+								{
+									"key": "locRadius",
+									"value": "1000000"
+								}
+							]
+						},
+						"description": "Эндпоинт возвращает полную информацию обо всех событиях подходящих под переданные условия"
+					},
+					"response": []
+				},
+				{
+					"name": "Search event by coordinates (Small radius - false)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = pm.collectionVariables.get('response');\r",
+									"const target = pm.response.json()[0];\r",
+									"\r",
+									"pm.test(\"Количество событий должно быть равным 1\", function () {\r",
+									"    pm.expect(pm.response.json().length).to.be.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Событие должно содержать поля: id, title, annotation, category, paid, eventDate, initiator, views, confirmedRequests, description, participantLimit, state, createdOn, publishedOn, location, requestModeration\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('title');\r",
+									"pm.expect(target).to.have.property('annotation');\r",
+									"pm.expect(target).to.have.property('category');\r",
+									"pm.expect(target).to.have.property('paid');\r",
+									"pm.expect(target).to.have.property('eventDate');\r",
+									"pm.expect(target).to.have.property('initiator');\r",
+									"pm.expect(target).to.have.property('views');\r",
+									"pm.expect(target).to.have.property('confirmedRequests');\r",
+									"pm.expect(target).to.have.property('description');\r",
+									"pm.expect(target).to.have.property('participantLimit');\r",
+									"pm.expect(target).to.have.property('state');\r",
+									"pm.expect(target).to.have.property('createdOn');\r",
+									"pm.expect(target).to.have.property('publishedOn');\r",
+									"pm.expect(target).to.have.property('location');\r",
+									"pm.expect(target).to.have.property('requestModeration');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(target.id).to.not.be.null;\r",
+									"    pm.expect(target.title).equal(\"Metallica 2024\", 'Название события должно соответствовать названию события в запросе');\r",
+									"    pm.expect(target.annotation).equal(\"This is the first show of the 2024 leg of the M72 World Tour!\", 'Аннотация события должна соответствовать аннотации события в запросе');\r",
+									"    pm.expect(target.paid.toString()).equal(\"true\", 'Стоимость события должна соответствовать стоимости события в запросе');\r",
+									"    pm.expect(target.eventDate).equal(\"2024-10-03 20:00:00\", 'Дата проведения события должна соответствовать дате проведения события в запросе');\r",
+									"    pm.expect(target.description).equal(\"Hammer news for all Metallica fans: James Hetfield, Lars Ulrich, Kirk Hammett und Robert Trujillo are back with a new album. Two (double) shows have been confirmed at the Olympic Stadium as part of the 'M72 World Tour'.\", 'Описание события должно соответствовать описание события в запросе');\r",
+									"    pm.expect(target.participantLimit.toString()).equal(\"50000\", 'Лимит участников события должно соответствовать лимиту участников события в запросе');\r",
+									"    pm.expect(target.location.lat.toString()).equal(\"10.785091\", 'Широта локации проведения события должна соответствовать широте локации проведения события в запросе');\r",
+									"    pm.expect(target.location.lon.toString()).equal(\"-7.968285\", 'Долгота локации проведения события должна соответствовать долготе локации проведения события в запросе');\r",
+									"    pm.expect(target.requestModeration.toString()).equal(\"true\", 'Необходимость модерации события должна соответствовать необходимости модерации события в запросе');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/events?users=&categories=&rangeStart=2012-01-06%2013%3A30%3A38&rangeEnd=2097-09-06%2013%3A30%3A38&from=0&size=1000&locLat=10.785091&locLon=-7.968285&locRadius=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"events"
+							],
+							"query": [
+								{
+									"key": "users",
+									"value": "",
+									"description": "список id пользователей, чьи события нужно найти"
+								},
+								{
+									"key": "states",
+									"value": "PUBLISHED",
+									"description": "список состояний в которых находятся искомые события",
+									"disabled": true
+								},
+								{
+									"key": "categories",
+									"value": "",
+									"description": "список id категорий в которых будет вестись поиск"
+								},
+								{
+									"key": "rangeStart",
+									"value": "2012-01-06%2013%3A30%3A38",
+									"description": "дата и время не раньше которых должно произойти событие"
+								},
+								{
+									"key": "rangeEnd",
+									"value": "2097-09-06%2013%3A30%3A38",
+									"description": "дата и время не позже которых должно произойти событие"
+								},
+								{
+									"key": "from",
+									"value": "0",
+									"description": "количество событий, которые нужно пропустить для формирования текущего набора"
+								},
+								{
+									"key": "size",
+									"value": "1000",
+									"description": "количество событий в наборе"
+								},
+								{
+									"key": "locLat",
+									"value": "10.785091"
+								},
+								{
+									"key": "locLon",
+									"value": "-7.968285"
+								},
+								{
+									"key": "locRadius",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Эндпоинт возвращает полную информацию обо всех событиях подходящих под переданные условия"
+					},
+					"response": []
+				},
+				{
+					"name": "Search event by location name (true)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = pm.collectionVariables.get('response');\r",
+									"const target = pm.response.json()[0];\r",
+									"\r",
+									"pm.test(\"Количество событий должно быть равным 1\", function () {\r",
+									"    pm.expect(pm.response.json().length).to.be.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Событие должно содержать поля: id, title, annotation, category, paid, eventDate, initiator, views, confirmedRequests, description, participantLimit, state, createdOn, publishedOn, location, requestModeration\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('title');\r",
+									"pm.expect(target).to.have.property('annotation');\r",
+									"pm.expect(target).to.have.property('category');\r",
+									"pm.expect(target).to.have.property('paid');\r",
+									"pm.expect(target).to.have.property('eventDate');\r",
+									"pm.expect(target).to.have.property('initiator');\r",
+									"pm.expect(target).to.have.property('views');\r",
+									"pm.expect(target).to.have.property('confirmedRequests');\r",
+									"pm.expect(target).to.have.property('description');\r",
+									"pm.expect(target).to.have.property('participantLimit');\r",
+									"pm.expect(target).to.have.property('state');\r",
+									"pm.expect(target).to.have.property('createdOn');\r",
+									"pm.expect(target).to.have.property('publishedOn');\r",
+									"pm.expect(target).to.have.property('location');\r",
+									"pm.expect(target).to.have.property('requestModeration');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(target.id).to.not.be.null;\r",
+									"    pm.expect(target.title).equal(\"Metallica 2024\", 'Название события должно соответствовать названию события в запросе');\r",
+									"    pm.expect(target.annotation).equal(\"This is the first show of the 2024 leg of the M72 World Tour!\", 'Аннотация события должна соответствовать аннотации события в запросе');\r",
+									"    pm.expect(target.paid.toString()).equal(\"true\", 'Стоимость события должна соответствовать стоимости события в запросе');\r",
+									"    pm.expect(target.eventDate).equal(\"2024-10-03 20:00:00\", 'Дата проведения события должна соответствовать дате проведения события в запросе');\r",
+									"    pm.expect(target.description).equal(\"Hammer news for all Metallica fans: James Hetfield, Lars Ulrich, Kirk Hammett und Robert Trujillo are back with a new album. Two (double) shows have been confirmed at the Olympic Stadium as part of the 'M72 World Tour'.\", 'Описание события должно соответствовать описание события в запросе');\r",
+									"    pm.expect(target.participantLimit.toString()).equal(\"50000\", 'Лимит участников события должно соответствовать лимиту участников события в запросе');\r",
+									"    pm.expect(target.location.lat.toString()).equal(\"10.785091\", 'Широта локации проведения события должна соответствовать широте локации проведения события в запросе');\r",
+									"    pm.expect(target.location.lon.toString()).equal(\"-7.968285\", 'Долгота локации проведения события должна соответствовать долготе локации проведения события в запросе');\r",
+									"    pm.expect(target.requestModeration.toString()).equal(\"true\", 'Необходимость модерации события должна соответствовать необходимости модерации события в запросе');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/events?users=&categories=&rangeStart=2012-01-06%2013%3A30%3A38&rangeEnd=2097-09-06%2013%3A30%3A38&from=0&size=1000&locName=Stadium",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"events"
+							],
+							"query": [
+								{
+									"key": "users",
+									"value": "",
+									"description": "список id пользователей, чьи события нужно найти"
+								},
+								{
+									"key": "states",
+									"value": "PUBLISHED",
+									"description": "список состояний в которых находятся искомые события",
+									"disabled": true
+								},
+								{
+									"key": "categories",
+									"value": "",
+									"description": "список id категорий в которых будет вестись поиск"
+								},
+								{
+									"key": "rangeStart",
+									"value": "2012-01-06%2013%3A30%3A38",
+									"description": "дата и время не раньше которых должно произойти событие"
+								},
+								{
+									"key": "rangeEnd",
+									"value": "2097-09-06%2013%3A30%3A38",
+									"description": "дата и время не позже которых должно произойти событие"
+								},
+								{
+									"key": "from",
+									"value": "0",
+									"description": "количество событий, которые нужно пропустить для формирования текущего набора"
+								},
+								{
+									"key": "size",
+									"value": "1000",
+									"description": "количество событий в наборе"
+								},
+								{
+									"key": "locLat",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "locLon",
+									"value": "-7",
+									"disabled": true
+								},
+								{
+									"key": "locRadius",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "locName",
+									"value": "Stadium"
+								}
+							]
+						},
+						"description": "Эндпоинт возвращает полную информацию обо всех событиях подходящих под переданные условия"
+					},
+					"response": []
+				},
+				{
+					"name": "Search event by location name (false)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = pm.collectionVariables.get('response');\r",
+									"pm.test(\"Количество событий должно быть равным 0\", function () {\r",
+									"    pm.expect(pm.response.json().length).to.be.equal(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/events?users=&categories=&rangeStart=2012-01-06%2013%3A30%3A38&rangeEnd=2097-09-06%2013%3A30%3A38&from=0&size=1000&locName=Park",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"events"
+							],
+							"query": [
+								{
+									"key": "users",
+									"value": "",
+									"description": "список id пользователей, чьи события нужно найти"
+								},
+								{
+									"key": "states",
+									"value": "PUBLISHED",
+									"description": "список состояний в которых находятся искомые события",
+									"disabled": true
+								},
+								{
+									"key": "categories",
+									"value": "",
+									"description": "список id категорий в которых будет вестись поиск"
+								},
+								{
+									"key": "rangeStart",
+									"value": "2012-01-06%2013%3A30%3A38",
+									"description": "дата и время не раньше которых должно произойти событие"
+								},
+								{
+									"key": "rangeEnd",
+									"value": "2097-09-06%2013%3A30%3A38",
+									"description": "дата и время не позже которых должно произойти событие"
+								},
+								{
+									"key": "from",
+									"value": "0",
+									"description": "количество событий, которые нужно пропустить для формирования текущего набора"
+								},
+								{
+									"key": "size",
+									"value": "1000",
+									"description": "количество событий в наборе"
+								},
+								{
+									"key": "locLat",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "locLon",
+									"value": "-7",
+									"disabled": true
+								},
+								{
+									"key": "locRadius",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "locName",
+									"value": "Park"
+								}
+							]
+						},
+						"description": "Эндпоинт возвращает полную информацию обо всех событиях подходящих под переданные условия"
+					},
+					"response": []
+				},
+				{
+					"name": "Search event by locationType name (true)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = pm.collectionVariables.get('response');\r",
+									"const target = pm.response.json()[0];\r",
+									"pm.test(\"Количество событий должно быть равным 1\", function () {\r",
+									"    pm.expect(pm.response.json().length).to.be.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Событие должно содержать поля: id, title, annotation, category, paid, eventDate, initiator, views, confirmedRequests, description, participantLimit, state, createdOn, publishedOn, location, requestModeration\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('title');\r",
+									"pm.expect(target).to.have.property('annotation');\r",
+									"pm.expect(target).to.have.property('category');\r",
+									"pm.expect(target).to.have.property('paid');\r",
+									"pm.expect(target).to.have.property('eventDate');\r",
+									"pm.expect(target).to.have.property('initiator');\r",
+									"pm.expect(target).to.have.property('views');\r",
+									"pm.expect(target).to.have.property('confirmedRequests');\r",
+									"pm.expect(target).to.have.property('description');\r",
+									"pm.expect(target).to.have.property('participantLimit');\r",
+									"pm.expect(target).to.have.property('state');\r",
+									"pm.expect(target).to.have.property('createdOn');\r",
+									"pm.expect(target).to.have.property('publishedOn');\r",
+									"pm.expect(target).to.have.property('location');\r",
+									"pm.expect(target).to.have.property('requestModeration');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(target.id).to.not.be.null;\r",
+									"    pm.expect(target.title).equal(\"Metallica 2024\", 'Название события должно соответствовать названию события в запросе');\r",
+									"    pm.expect(target.annotation).equal(\"This is the first show of the 2024 leg of the M72 World Tour!\", 'Аннотация события должна соответствовать аннотации события в запросе');\r",
+									"    pm.expect(target.paid.toString()).equal(\"true\", 'Стоимость события должна соответствовать стоимости события в запросе');\r",
+									"    pm.expect(target.eventDate).equal(\"2024-10-03 20:00:00\", 'Дата проведения события должна соответствовать дате проведения события в запросе');\r",
+									"    pm.expect(target.description).equal(\"Hammer news for all Metallica fans: James Hetfield, Lars Ulrich, Kirk Hammett und Robert Trujillo are back with a new album. Two (double) shows have been confirmed at the Olympic Stadium as part of the 'M72 World Tour'.\", 'Описание события должно соответствовать описание события в запросе');\r",
+									"    pm.expect(target.participantLimit.toString()).equal(\"50000\", 'Лимит участников события должно соответствовать лимиту участников события в запросе');\r",
+									"    pm.expect(target.location.lat.toString()).equal(\"10.785091\", 'Широта локации проведения события должна соответствовать широте локации проведения события в запросе');\r",
+									"    pm.expect(target.location.lon.toString()).equal(\"-7.968285\", 'Долгота локации проведения события должна соответствовать долготе локации проведения события в запросе');\r",
+									"    pm.expect(target.requestModeration.toString()).equal(\"true\", 'Необходимость модерации события должна соответствовать необходимости модерации события в запросе');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/events?users=&categories=&rangeStart=2012-01-06%2013%3A30%3A38&rangeEnd=2097-09-06%2013%3A30%3A38&from=0&size=1000&locTypes=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"events"
+							],
+							"query": [
+								{
+									"key": "users",
+									"value": "",
+									"description": "список id пользователей, чьи события нужно найти"
+								},
+								{
+									"key": "states",
+									"value": "PUBLISHED",
+									"description": "список состояний в которых находятся искомые события",
+									"disabled": true
+								},
+								{
+									"key": "categories",
+									"value": "",
+									"description": "список id категорий в которых будет вестись поиск"
+								},
+								{
+									"key": "rangeStart",
+									"value": "2012-01-06%2013%3A30%3A38",
+									"description": "дата и время не раньше которых должно произойти событие"
+								},
+								{
+									"key": "rangeEnd",
+									"value": "2097-09-06%2013%3A30%3A38",
+									"description": "дата и время не позже которых должно произойти событие"
+								},
+								{
+									"key": "from",
+									"value": "0",
+									"description": "количество событий, которые нужно пропустить для формирования текущего набора"
+								},
+								{
+									"key": "size",
+									"value": "1000",
+									"description": "количество событий в наборе"
+								},
+								{
+									"key": "locLat",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "locLon",
+									"value": "-7",
+									"disabled": true
+								},
+								{
+									"key": "locRadius",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "locTypes",
+									"value": "4"
+								}
+							]
+						},
+						"description": "Эндпоинт возвращает полную информацию обо всех событиях подходящих под переданные условия"
+					},
+					"response": []
+				},
+				{
+					"name": "Search event by locationType name (false)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = pm.collectionVariables.get('response');\r",
+									"pm.test(\"Количество событий должно быть равным 0\", function () {\r",
+									"    pm.expect(pm.response.json().length).to.be.equal(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/events?users=&categories=&rangeStart=2012-01-06%2013%3A30%3A38&rangeEnd=2097-09-06%2013%3A30%3A38&from=0&size=1000&locTypes=40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"events"
+							],
+							"query": [
+								{
+									"key": "users",
+									"value": "",
+									"description": "список id пользователей, чьи события нужно найти"
+								},
+								{
+									"key": "states",
+									"value": "PUBLISHED",
+									"description": "список состояний в которых находятся искомые события",
+									"disabled": true
+								},
+								{
+									"key": "categories",
+									"value": "",
+									"description": "список id категорий в которых будет вестись поиск"
+								},
+								{
+									"key": "rangeStart",
+									"value": "2012-01-06%2013%3A30%3A38",
+									"description": "дата и время не раньше которых должно произойти событие"
+								},
+								{
+									"key": "rangeEnd",
+									"value": "2097-09-06%2013%3A30%3A38",
+									"description": "дата и время не позже которых должно произойти событие"
+								},
+								{
+									"key": "from",
+									"value": "0",
+									"description": "количество событий, которые нужно пропустить для формирования текущего набора"
+								},
+								{
+									"key": "size",
+									"value": "1000",
+									"description": "количество событий в наборе"
+								},
+								{
+									"key": "locLat",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "locLon",
+									"value": "-7",
+									"disabled": true
+								},
+								{
+									"key": "locRadius",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "locTypes",
+									"value": "40"
+								}
+							]
+						},
+						"description": "Эндпоинт возвращает полную информацию обо всех событиях подходящих под переданные условия"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"API = class {",
+					"    constructor(postman, verbose = false, baseUrl = \"http://localhost:8080\") {",
+					"        this.baseUrl = baseUrl;",
+					"        this.pm = postman;",
+					"        this._verbose = verbose;",
+					"    }",
+					"",
+					"    async addUser(user, verbose=null) {",
+					"        return this.post(\"/admin/users\", user, \"Ошибка при добавлении нового пользователя: \", verbose);",
+					"    }",
+					"",
+					"    async addLocation(location, verbose=null) {",
+					"        return this.post(\"/admin/locations\", location, \"Ошибка при добавлении новой локации: \", verbose);",
+					"    }",
+					"",
+					"    async addLocationType(locationType, verbose=null) {",
+					"        return this.post(\"/admin/locations/types\", locationType, \"Ошибка при добавлении нового типа локации: \", verbose);",
+					"    }",
+					"",
+					"    async addCategory(category, verbose=null) {",
+					"        return this.post(\"/admin/categories\", category, \"Ошибка при добавлении новой категории: \", verbose);",
+					"    }",
+					"",
+					"    async addEvent(userId, event, verbose=null) {",
+					"        return this.post(\"/users/\" + userId + \"/events\", event, \"Ошибка при добавлении нового события: \", verbose);",
+					"    }",
+					"",
+					"    async addCompilation(compilation, verbose=null) {",
+					"        return this.post(\"/admin/compilations\", compilation, \"Ошибка при добавлении новой подборки: \", verbose);",
+					"    }",
+					"",
+					"    async publishParticipationRequest(eventId, userId, verbose=null) {",
+					"        return this.post('/users/' + userId + '/requests?eventId=' + eventId, null, \"Ошибка при добавлении нового запроса на участие в событии\", verbose);",
+					"    }",
+					"",
+					"    async publishEvent(eventId, verbose=null) {",
+					"        return this.patch('/admin/events/' + eventId, {stateAction: \"PUBLISH_EVENT\"}, \"Ошибка при публикации события\", verbose);",
+					"    }",
+					"    ",
+					"    async rejectEvent(eventId, verbose=null) {",
+					"        return this.patch('/admin/events/' + eventId, {stateAction: \"REJECT_EVENT\"}, \"Ошибка при отмене события\", verbose);",
+					"    }",
+					"",
+					"    async acceptParticipationRequest(eventId, userId, reqId, verbose=null) {",
+					"        return this.patch('/users/' + userId + '/events/' + eventId + '/requests', {requestIds:[reqId], status: \"CONFIRMED\"}, \"Ошибка при принятии заявки на участие в событии\", verbose);",
+					"    }",
+					"",
+					"    async findCategory(catId, verbose=null) {",
+					"        return this.get('/categories/' + catId, null, \"Ошибка при поиске категории по id\", verbose);",
+					"    }",
+					"",
+					"    async findCompilation(compId, verbose=null) {",
+					"        return this.get('/compilations/' + compId, null, \"Ошибка при поиске подборки по id\", verbose);",
+					"    }",
+					"",
+					"    async findEvent(eventId, verbose=null) {",
+					"        return this.get('/events/' + eventId, null, \"Ошибка при поиске события по id\", verbose);",
+					"    }",
+					"",
+					"    async findUser(userId, verbose=null) {",
+					"        return this.get('/admin/users?ids=' + userId, null, \"Ошибка при поиске пользователя по id\", verbose);",
+					"    }",
+					"",
+					"    async post(path, body, errorText = \"Ошибка при выполнении post-запроса: \", verbose=null) {",
+					"        return this.sendRequest(\"POST\", path, body, errorText, verbose);",
+					"    }",
+					"",
+					"    async patch(path, body = null, errorText = \"Ошибка при выполнении patch-запроса: \", verbose=null) {",
+					"        return this.sendRequest(\"PATCH\", path, body, errorText, verbose);",
+					"    }",
+					"",
+					"    async get(path, body = null, errorText = \"Ошибка при выполнении get-запроса: \", verbose=null) {",
+					"        return this.sendRequest(\"GET\", path, body, errorText, verbose);",
+					"    }",
+					"    async sendRequest(method, path, body=null, errorText = \"Ошибка при выполнении запроса: \", verbose=null) {",
+					"        return new Promise((resolve, reject) => {",
+					"            verbose = verbose == null ? this._verbose : verbose;",
+					"            const request = {",
+					"                url: this.baseUrl + path,",
+					"                method: method,",
+					"                body: body == null ? \"\" : JSON.stringify(body),",
+					"                header: { \"Content-Type\": \"application/json\" },",
+					"            };",
+					"            if(verbose) {",
+					"                console.log(\"Отправляю запрос: \", request);",
+					"            }",
+					"",
+					"            try {",
+					"                this.pm.sendRequest(request, (error, response) => {",
+					"                    if(error || (response.code >= 400 && response.code <= 599)) {",
+					"                        let err = error ? error : JSON.stringify(response.json());",
+					"                        console.error(\"При выполнении запроса к серверу возникла ошика.\\n\", err,",
+					"                             \"\\nДля отладки проблемы повторите такой же запрос к вашей программе \" + ",
+					"                             \"на локальном компьютере. Данные запроса:\\n\", JSON.stringify(request));",
+					"",
+					"                        reject(new Error(errorText + err));",
+					"                    }",
+					"                    if(verbose) {",
+					"                        console.log(\"Результат обработки запроса: код состояния - \", response.code, \", тело: \", response.json());",
+					"                    }",
+					"                    if (response.stream.length === 0){",
+					"                        reject(new Error('Отправлено пустое тело ответа'))",
+					"                    }else{",
+					"                        resolve(response.json());",
+					"                    }",
+					"                });",
+					"                ",
+					"            } catch(err) {",
+					"                if(verbose) {",
+					"                    console.error(errorText, err);",
+					"                }",
+					"                return Promise.reject(err);",
+					"            }",
+					"        });",
+					"    }",
+					"};",
+					"",
+					"RandomUtils = class {",
+					"    constructor() {}",
+					"",
+					"    getUser() {",
+					"        return {",
+					"            name: pm.variables.replaceIn('{{$randomFullName}}'),",
+					"            email: pm.variables.replaceIn('{{$randomEmail}}')",
+					"        };",
+					"    }",
+					"",
+					"    getCategory() {",
+					"        return {",
+					"            name: pm.variables.replaceIn('{{$randomWord}}') + Math.floor(Math.random() * 10000 * Math.random()).toString()",
+					"        };",
+					"    }",
+					"",
+					"    getEvent(categoryId) {",
+					"        return {",
+					"            annotation: pm.variables.replaceIn('{{$randomLoremParagraph}}'),",
+					"            category: categoryId,",
+					"            description: pm.variables.replaceIn('{{$randomLoremParagraphs}}'),",
+					"            eventDate: this.getFutureDateTime(),",
+					"            location: {",
+					"                lat: parseFloat(pm.variables.replaceIn('{{$randomLatitude}}')),",
+					"                lon: parseFloat(pm.variables.replaceIn('{{$randomLongitude}}')),",
+					"            },",
+					"            paid: pm.variables.replaceIn('{{$randomBoolean}}'),",
+					"            participantLimit: pm.variables.replaceIn('{{$randomInt}}'),",
+					"            requestModeration: pm.variables.replaceIn('{{$randomBoolean}}'),",
+					"            title: pm.variables.replaceIn('{{$randomLoremSentence}}'),",
+					"        }",
+					"    }",
+					"",
+					"    getCompilation(...eventIds) {",
+					"        return {",
+					"            title: pm.variables.replaceIn('{{$randomLoremSentence}}').slice(0, 50),",
+					"            pinned: pm.variables.replaceIn('{{$randomBoolean}}'),",
+					"            events: eventIds",
+					"        };",
+					"    }",
+					"",
+					"",
+					"    getFutureDateTime(hourShift = 5, minuteShift=0, yearShift=0) {",
+					"        let moment = require('moment');",
+					"",
+					"        let m = moment();",
+					"        m.add(hourShift, 'hour');",
+					"        m.add(minuteShift, 'minute');",
+					"        m.add(yearShift, 'year');",
+					"",
+					"        return m.format('YYYY-MM-DD HH:mm:ss');",
+					"    }",
+					"",
+					"    getWord(length = 1) {",
+					"        let result = '';",
+					"        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';",
+					"        const charactersLength = characters.length;",
+					"        let counter = 0;",
+					"        while (counter < length) {",
+					"            result += characters.charAt(Math.floor(Math.random() * charactersLength));",
+					"            counter += 1;",
+					"        }",
+					"        return result;",
+					"    }",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
